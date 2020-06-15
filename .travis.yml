@@ -38,7 +38,7 @@ before_script:
 
 script:
   - export TESTSPACE=`pwd`/testspace
-  - export NAME_OF_PLUGIN=redmine_custom_fields_sections
+  - export NAME_OF_PLUGIN=redmine_context_menus_extras
   - export PATH_TO_PLUGIN=`pwd`
   - export PATH_TO_REDMINE=$TESTSPACE/redmine
   - mkdir $TESTSPACE
