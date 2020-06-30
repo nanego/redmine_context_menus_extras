@@ -1,0 +1,9 @@
+<%= form_for @relation, {
+                 :as => :relation,
+                 :url => bulk_create_issue_relations_path,
+                 :method => :post,
+                 :data => {:cm_url => issues_context_menu_path}
+               } do |f| %>
+<%= @issues.collect {|i| hidden_field_tag('ids[]', i.id, :id => nil)}.join("\n").html_safe %>
+<%= render :partial => 'issue_relations/form', :locals => {:f => f}%>
+<% end %>
