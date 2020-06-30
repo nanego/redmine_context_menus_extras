@@ -1,0 +1,3 @@
+en:
+  label_bulk_new_issue_relations_selected_issues: Link selected issues toi
+  notice_failed_to_save_issue_relations: "Failed to save %{count} issue(s) relation(s) on %{total} selected: %{ids}."

@@ -1,3 +1,21 @@
+<h2><%= l(:label_bulk_new_issue_relations_selected_issues) %></h2>
+
+<% if @saved_relations && @unsaved_relations.present? %>
+<div id="errorExplanation">
+  <span>
+    <%= l(:notice_failed_to_save_issue_relations,
+        :count => @unsaved_relations.size,
+        :total => @saved_relations.size,
+        :ids => @unsaved_relations.map {|i| "##{i.issue_from_id}"}.join(', ')) %>
+  </span>
+  <ul>
+  <% bulk_new_error_messages(@unsaved_relations, :issue_from_id).each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
 <%= form_for @relation, {
                  :as => :relation,
                  :url => bulk_create_issue_relations_path,

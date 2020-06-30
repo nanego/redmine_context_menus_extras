@@ -3,6 +3,8 @@ require_dependency "issue_relations_controller"
 class IssueRelationsController
   before_action :find_issues, :only => [:bulk_new, :bulk_create]
 
+  helper RedmineContextMenusExtras::ApplicationHelper
+
   def bulk_new
     # TODO: connfirm
     if !@issues.all?(&:attributes_editable?) || !User.current.allowed_to?(:manage_issue_relations, @project)
@@ -43,11 +45,14 @@ class IssueRelationsController
 
     if unsaved_relations.empty?
       flash[:notice] = l(:notice_successful_create) unless saved_relations.empty?
+      redirect_to _project_issues_path(@project)
     else
-      # TODO
-      # flash[:alert] =
+      @saved_relations = saved_relations
+      @unsaved_relations = unsaved_relations
+      @issues = Issue.visible.where(:id => @unsaved_relations.map(&:issue_from_id)).to_a
+      @issue = @issues.first
+      bulk_new
+      render :action => 'bulk_new'
     end
-
-    redirect_to _project_issues_path(@project)
   end
 end

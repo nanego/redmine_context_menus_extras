@@ -1,6 +1,6 @@
 require_dependency "context_menus_extras_listener"
 
-Rails.application.config.to_prepare do
+ActiveSupport::Reloader.to_prepare do
   require_dependency "redmine_context_menus_extras/controllers/issue_relations_controller"
 end
 

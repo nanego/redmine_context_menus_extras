@@ -1,0 +1,3 @@
+fr:
+  label_bulk_new_issue_relations_selected_issues: Lier les demandes sélectionnées à
+  notice_failed_to_save_issue_relations: "%{count} demande(s) sur les %{total} sélectionnées n'ont pas pu être reliée(s) à la demande : %{ids}."
