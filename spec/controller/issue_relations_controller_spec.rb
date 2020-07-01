@@ -56,14 +56,16 @@ describe IssueRelationsController, type: :controller do
     end
 
     it "should not create relations unless issue_to_id specified" do
-      post :bulk_create, params: {
-        issue_id: issues.first.id,
-        ids: issues[0..1].map(&:id),
-        relation: {
-          relation_type: "relates",
-          issue_to_id: issues.last
+      expect do
+        post :bulk_create, params: {
+          issue_id: issues.first.id,
+          ids: issues[0..1].map(&:id),
+          relation: {
+            relation_type: "relates",
+            issue_to_id: issues.last
+          }
         }
-      }
+      end.to change { IssueRelation.count }.by(2)
 
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(project_issues_path(project_id: project))
