@@ -1,0 +1,8 @@
+<% if @redirect_to %>
+  window.location.replace("<%= @redirect_to %>");
+<% else %>
+  $('#ajax-modal').html('<%= escape_javascript(render :partial => 'issue_relations/bulk_new') %>');
+  showModal('ajax-modal', '500px');
+  $('#ajax-modal').addClass('bulk-new-relations');
+  $('ul.ui-autocomplete').css('z-index', '1500');
+<% end %>

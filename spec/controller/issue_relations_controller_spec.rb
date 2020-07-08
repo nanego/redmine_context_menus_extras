@@ -23,7 +23,7 @@ describe IssueRelationsController, type: :controller do
 
   describe "GET /issues/:issue_id/relations/bulk_new?ids[]=" do
     it "show form to bulk create issue relations for selected issues" do
-      get :bulk_new, params: { issue_id: issues.first.id, ids: issues.map(&:id) }
+      get :bulk_new, xhr: true, format: :js, params: { issue_id: issues.first.id, ids: issues.map(&:id) }
 
       expect(response).to have_http_status(:success)
       expect(assigns(:project)).to eq(project)
@@ -36,7 +36,7 @@ describe IssueRelationsController, type: :controller do
 
   describe "POST /issues/:issue_id/relations/bulk_create" do
     it "should not create relations unless issue_to_id specified" do
-      post :bulk_create, params: {
+      post :bulk_create, xhr: true, format: :js, params: {
         issue_id: issues.first.id,
         ids: issues.map(&:id),
         relation: {
@@ -57,7 +57,7 @@ describe IssueRelationsController, type: :controller do
 
     it "should not create relations unless issue_to_id specified" do
       expect do
-        post :bulk_create, params: {
+        post :bulk_create, xhr: true, format: :js, params: {
           issue_id: issues.first.id,
           ids: issues[0..1].map(&:id),
           relation: {
@@ -67,8 +67,8 @@ describe IssueRelationsController, type: :controller do
         }
       end.to change { IssueRelation.count }.by(2)
 
-      expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(project_issues_path(project_id: project))
+      expect(response).to have_http_status(:success)
+      expect(assigns(:redirect_to)).to eq(project_issues_path(project_id: project))
     end
   end
 end

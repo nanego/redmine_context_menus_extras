@@ -45,14 +45,15 @@ class IssueRelationsController
 
     if unsaved_relations.empty?
       flash[:notice] = l(:notice_successful_create) unless saved_relations.empty?
-      redirect_to _project_issues_path(@project)
+      @redirect_to = _project_issues_path(@project)
     else
       @saved_relations = saved_relations
       @unsaved_relations = unsaved_relations
       @issues = Issue.visible.where(:id => @unsaved_relations.map(&:issue_from_id)).to_a
       @issue = @issues.first
       bulk_new
-      render :action => 'bulk_new'
     end
+
+    render :action => 'bulk_new'
   end
 end
