@@ -53,7 +53,5 @@ class IssueRelationsController
       @issue = @issues.first
       bulk_new
     end
-
-    render :action => 'bulk_new'
   end
 end
