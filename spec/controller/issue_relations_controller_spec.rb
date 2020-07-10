@@ -52,7 +52,7 @@ describe IssueRelationsController, type: :controller do
       expect(assigns(:issues)).to eq(issues)
       expect(assigns(:issue)).to eq(issues.first)
       expect(assigns(:relation)).to be_a(IssueRelation)
-      expect(response).to render_template(:bulk_new)
+      expect(response).to render_template(:bulk_create)
     end
 
     it "should not create relations unless issue_to_id specified" do
@@ -69,6 +69,7 @@ describe IssueRelationsController, type: :controller do
 
       expect(response).to have_http_status(:success)
       expect(assigns(:redirect_to)).to eq(project_issues_path(project_id: project))
+      expect(response).to render_template(:bulk_create)
     end
   end
 end
