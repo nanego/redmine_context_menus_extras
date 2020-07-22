@@ -2,3 +2,7 @@ $('#ajax-modal').html('<%= escape_javascript(render :partial => 'issue_relations
 showModal('ajax-modal', '500px');
 $('#ajax-modal').addClass('bulk-new-relations');
 $('ul.ui-autocomplete').css('z-index', '1500');
+
+$('#ajax-modal').on('dialogdragstop', function() {
+  $('ul.ui-autocomplete').css('z-index', $('#ajax-modal').closest('.ui-dialog').css('z-index') + 1);
+});
