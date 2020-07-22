@@ -45,7 +45,7 @@ class IssueRelationsController
 
     if unsaved_relations.empty?
       flash[:notice] = l(:notice_successful_create) unless saved_relations.empty?
-      @redirect_to = _project_issues_path(@project)
+      @redirect_to = request.headers["Referer"].presence || _project_issues_path(@project)
     else
       @saved_relations = saved_relations
       @unsaved_relations = unsaved_relations
