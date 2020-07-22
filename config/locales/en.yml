@@ -1,3 +1,4 @@
 en:
   label_bulk_new_issue_relations_selected_issues: Add new relations
   notice_failed_to_save_issue_relations: "Failed to save %{count} issue(s) relation(s) on %{total} selected: %{ids}."
+  contextual_menu_relates_to: Relate to
