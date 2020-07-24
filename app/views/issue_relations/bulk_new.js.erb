@@ -4,5 +4,5 @@ $('#ajax-modal').addClass('bulk-new-relations');
 $('ul.ui-autocomplete').css('z-index', '1500');
 
 $('#ajax-modal').on('dialogdragstop', function() {
-  $('ul.ui-autocomplete').css('z-index', $('#ajax-modal').closest('.ui-dialog').css('z-index') + 1);
+  $('ul.ui-autocomplete').css('z-index', parseInt($('#ajax-modal').closest('.ui-dialog').css('z-index')) + 1);
 });
