@@ -1,14 +1,8 @@
 <% if User.current.allowed_to?(:manage_issue_relations, @project) %>
-  <li class="folder">
-    <a href="#" class="submenu">
-      <%= l("contextual_menu_relates_to") %>
-    </a>
-    <ul>
-      <li><%= context_menu_link l(:button_add),
-                                bulk_new_issue_relations_path(issue_id: @issue_ids.first, :ids => @issue_ids),
-                                :remote => true,
-                                :class => 'icon icon-add' %>
-      </li>
-    </ul>
+  <li>
+    <%= context_menu_link l(:contextual_menu_relates_to),
+                          bulk_new_issue_relations_path(issue_id: @issue_ids.first, :ids => @issue_ids),
+                          :remote => true,
+                          :class => 'icon icon-attachment' %>
   </li>
 <% end %>
