@@ -6,10 +6,7 @@ class IssueRelationsController
   helper RedmineContextMenusExtras::ApplicationHelper
 
   def bulk_new
-    # TODO: connfirm
-    if !@issues.all?(&:attributes_editable?) || !User.current.allowed_to?(:manage_issue_relations, @project)
-      raise ::Unauthorized
-    end
+    raise ::Unauthorized unless allowed_to_bulk_action?
 
     @issues.sort!
     @issue = @issues.first
@@ -18,10 +15,7 @@ class IssueRelationsController
   end
 
   def bulk_create
-    # TODO: connfirm
-    if !@issues.all?(&:attributes_editable?) || !User.current.allowed_to?(:manage_issue_relations, @project)
-      raise ::Unauthorized
-    end
+    raise ::Unauthorized unless allowed_to_bulk_action?
 
     @issues.sort!
 
@@ -53,5 +47,14 @@ class IssueRelationsController
       @issue = @issues.first
       bulk_new
     end
+  end
+
+  private
+
+  def allowed_to_bulk_action?
+    return false unless @issues.all?(&:attributes_editable?)
+    return false unless User.current.allowed_to?(:manage_issue_relations, @project)
+
+    true
   end
 end
