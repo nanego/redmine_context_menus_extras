@@ -1,4 +1,5 @@
-<% if User.current.allowed_to?(:manage_issue_relations, @project) %>
+<% if User.current.allowed_to?(:manage_issue_relations, @project) \
+      || User.current.allowed_to?(:manage_issue_relations, @projects) %>
   <li>
     <%= context_menu_link l(:contextual_menu_relates_to),
                           bulk_new_issue_relations_path(issue_id: @issue_ids.first, :ids => @issue_ids),

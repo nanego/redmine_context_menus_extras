@@ -53,7 +53,11 @@ class IssueRelationsController
 
   def allowed_to_bulk_action?
     return false unless @issues.all?(&:attributes_editable?)
-    return false unless User.current.allowed_to?(:manage_issue_relations, @project)
+
+    if !User.current.allowed_to?(:manage_issue_relations, @project) \
+      && !User.current.allowed_to?(:manage_issue_relations, @projects)
+      return false
+    end
 
     true
   end
