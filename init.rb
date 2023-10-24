@@ -1,7 +1,9 @@
-require_dependency "context_menus_extras_listener"
+require_relative "lib/context_menus_extras_listener"
 
-ActiveSupport::Reloader.to_prepare do
-  require_dependency "redmine_context_menus_extras/controllers/issue_relations_controller"
+class ModelHook < Redmine::Hook::Listener
+  def after_plugins_loaded(_context = {})
+    require_relative "lib/redmine_context_menus_extras/controllers/issue_relations_controller"
+  end
 end
 
 Redmine::Plugin.register :redmine_context_menus_extras do

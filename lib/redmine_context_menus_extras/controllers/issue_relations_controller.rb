@@ -1,10 +1,6 @@
 require_dependency "issue_relations_controller"
 
-class IssueRelationsController
-  before_action :find_issues, :only => [:bulk_new, :bulk_create]
-
-  helper RedmineContextMenusExtras::ApplicationHelper
-
+module RedmineContextMenusExtras::Controllers::IssueRelationsController
   def bulk_new
     raise ::Unauthorized unless allowed_to_bulk_action?
 
@@ -48,6 +44,14 @@ class IssueRelationsController
       bulk_new
     end
   end
+end
+
+class IssueRelationsController
+  include RedmineContextMenusExtras::Controllers::IssueRelationsController
+
+  before_action :find_issues, :only => [:bulk_new, :bulk_create]
+
+  helper RedmineContextMenusExtras::ApplicationHelper
 
   private
 
