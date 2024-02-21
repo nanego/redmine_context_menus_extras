@@ -1,10 +1,5 @@
 require_relative "lib/context_menus_extras_listener"
-
-class ModelHook < Redmine::Hook::Listener
-  def after_plugins_loaded(_context = {})
-    require_relative "lib/redmine_context_menus_extras/controllers/issue_relations_controller"
-  end
-end
+require_relative 'lib/redmine_context_menus_extras/hooks'
 
 Redmine::Plugin.register :redmine_context_menus_extras do
   name 'Redmine Context Menus Extras plugin'
