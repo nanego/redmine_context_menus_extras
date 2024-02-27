@@ -15,7 +15,7 @@ describe IssueRelationsController, type: :controller do
     @request = ActionDispatch::TestRequest.create
     @response = ActionDispatch::TestResponse.new
     User.current = nil
-    @request.session[:user_id] = 2 #permissions are hard
+    @request.session[:user_id] = 2 # permissions are hard
   end
 
   let(:project) { Project.find(1) }
